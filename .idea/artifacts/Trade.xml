@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Trade">
+    <output-path>$USER_HOME$/Desktop/Minecraft Server/plugins</output-path>
+    <root id="archive" name="Trade.jar">
+      <element id="module-output" name="Trade" />
+    </root>
+  </artifact>
+</component>
