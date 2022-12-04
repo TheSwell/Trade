@@ -3,7 +3,6 @@ package ru.trade;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -24,7 +23,7 @@ public class TradeAPI implements TradeInterface {
     ItemsUtils itemsUtils = new ItemsUtils();
 
     @Override
-    public void createTradeInventory(Player player) {
+    public void startTrade(Player player) {
         Inventory inventory = Bukkit.createInventory(null, 36, player.getName());
 
         ArmorStand trade = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
@@ -47,9 +46,10 @@ public class TradeAPI implements TradeInterface {
     }
 
     @Override
-    public void removeTradeInventory(Player player) {
-        if (hasTradeInventory(player)) {
+    public void stopTrade(Player player) {
+        if (isTrading(player)) {
             SellerInventoryListener.getItemPrice().remove(getTradeInventory(player));
+            SellerInventoryListener.getSaveSelectedSlot().remove(player.getName());
             for (ItemStack item :
                     getItemsFromTradeInventory(player)) {
                 if (item != null) {
@@ -70,14 +70,14 @@ public class TradeAPI implements TradeInterface {
 
     @Override
     public Inventory getTradeInventory(Player player) {
-        if (hasTradeInventory(player))
+        if (isTrading(player))
             return tradeInventoryMap.get(player.getName());
         return null;
     }
 
     @Override
     public List<ItemStack> getItemsFromTradeInventory(Player player) {
-        if (hasTradeInventory(player))
+        if (isTrading(player))
             return Arrays.asList(tradeInventoryMap.get(player.getName()).getContents());
         return new ArrayList<>();
     }
@@ -85,7 +85,7 @@ public class TradeAPI implements TradeInterface {
 
     @Override
     public void addItemInTradeInventory(Player player, int slot, ItemStack itemStack, double price) {
-        if (itemStack != null && hasTradeInventory(player)) {
+        if (itemStack != null && isTrading(player)) {
             Map<Integer, Double> iprice = new HashMap<>();
             Inventory inventory = tradeInventoryMap.get(player.getName());
             for (ItemStack item :
@@ -114,7 +114,7 @@ public class TradeAPI implements TradeInterface {
     }
 
     @Override
-    public boolean hasTradeInventory(Player player) {
+    public boolean isTrading(Player player) {
         return tradeInventoryMap.containsKey(player.getName());
     }
 }

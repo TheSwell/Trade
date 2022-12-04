@@ -12,7 +12,8 @@ public class PlaceHolder {
         return ChatColor.translateAlternateColorCodes('&', cfg.replaceAll("%targetPlayer%", targetPlayer.getName()).replaceAll("%player%", player.getName()));
     }
 
-    public static String setPlaceHolderInConfig(String key, Player player) {
+    public static String
+    setPlaceHolderInConfig(String key, Player player) {
         String cfg = Trade.getInstance().getConfig().getString(key);
 
         return ChatColor.translateAlternateColorCodes('&', cfg.replaceAll("%player%", player.getName()));

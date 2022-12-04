@@ -4,10 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Stray;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -103,11 +101,11 @@ public class SellerInventoryListener implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
         Player player = (Player) e.getPlayer();
-        if (api.hasTradeInventory(player)) {
+        if (api.isTrading(player)) {
             Inventory inventory = api.getTradeInventory(player);
             if (e.getView().getTitle().equalsIgnoreCase(player.getName())) {
                 if (!getPriceRequest().contains(player.getName()) && !saveSelectedSlot.containsKey(player.getName())) {
-                    api.removeTradeInventory(player);
+                    api.stopTrade(player);
                     saveSelectedSlot.remove(player.getName());
                     if (priceRequest.contains(player.getName()))
                         priceRequest.remove(player.getName());

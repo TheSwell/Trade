@@ -3,7 +3,6 @@ package ru.trade;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,7 +10,6 @@ import ru.trade.executors.TradeExecutor;
 import ru.trade.listeners.*;
 import ru.trade.utils.ConfigDefaultSettings;
 
-import java.io.File;
 import java.util.logging.Logger;
 
 public class Trade extends JavaPlugin {
@@ -50,7 +48,7 @@ public class Trade extends JavaPlugin {
     public void onDisable() {
         for (Player onlinePlayers :
                 getServer().getOnlinePlayers()) {
-            API.removeTradeInventory(onlinePlayers);
+            API.stopTrade(onlinePlayers);
 
             onlinePlayers.closeInventory();
         }

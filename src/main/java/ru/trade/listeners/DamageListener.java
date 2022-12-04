@@ -13,7 +13,7 @@ public class DamageListener implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player player) {
-            api.removeTradeInventory(player);
+            api.stopTrade(player);
         }
     }
 

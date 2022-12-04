@@ -15,7 +15,7 @@ public class InteractListener implements Listener {
         Player player = e.getPlayer();
         if (e.getRightClicked() instanceof Player clickedPlayer) {
             if (e.getHand().equals(EquipmentSlot.HAND))
-                if (Trade.getAPI().hasTradeInventory(clickedPlayer)) {
+                if (Trade.getAPI().isTrading(clickedPlayer)) {
                     if (!SellerInventoryListener.getSaveSelectedSlot().containsKey(clickedPlayer.getName())) {
                         player.openInventory(Trade.getAPI().getTradeInventory(clickedPlayer));
                         BuyerInventoryListener.getTradeInventory().put(player.getName(), clickedPlayer.getPlayer());

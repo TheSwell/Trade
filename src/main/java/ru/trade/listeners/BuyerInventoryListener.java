@@ -1,6 +1,5 @@
 package ru.trade.listeners;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,7 +30,7 @@ public class BuyerInventoryListener implements Listener {
         Player player = (Player) e.getWhoClicked();
 
         if (tradeInventory.get(player.getName()) != null)
-            if (api.hasTradeInventory(tradeInventory.get(player.getName()))) {
+            if (api.isTrading(tradeInventory.get(player.getName()))) {
                 Inventory inventory = api.getTradeInventory(tradeInventory.get(player.getName()));
 
                 if (e.getInventory() == inventory) {
@@ -62,7 +61,7 @@ public class BuyerInventoryListener implements Listener {
                                             player.sendMessage("§7[§4-§7]§f " + SellerInventoryListener.getItemPrice().get(inventory).get(slot));
                                             tradeInventory.get(player.getName()).sendMessage("§7[§2+§7]§f " + SellerInventoryListener.getItemPrice().get(inventory).get(slot));
                                             SellerInventoryListener.getItemPrice().get(inventory).remove(slot);
-                                        } else player.sendMessage("haventMoney");
+                                        } else player.sendMessage(PlaceHolder.setPlaceHolderInConfig("haventMoney"));
                                     }
                                 }
                             }
@@ -76,6 +75,8 @@ public class BuyerInventoryListener implements Listener {
             } else {
                 e.setCancelled(true);
                 player.closeInventory();
+                tradeInventory.remove(player.getName());
+                selectedSlot.remove(player.getName());
             }
     }
 
