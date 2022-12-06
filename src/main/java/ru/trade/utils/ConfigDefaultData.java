@@ -6,7 +6,7 @@ import ru.trade.Trade;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConfigDefaultSettings {
+public class ConfigDefaultData {
     private static final FileConfiguration config = Trade.getInstance().getConfig();
     private static final Map<String, Object> message = new HashMap<>();
 

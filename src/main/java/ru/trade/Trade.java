@@ -12,7 +12,7 @@ import ru.trade.listeners.*;
 import ru.trade.custom.listeners.TradeListener;
 import ru.trade.listeners.inventoryes.BuyerInventoryListener;
 import ru.trade.listeners.inventoryes.SellerInventoryListener;
-import ru.trade.utils.ConfigDefaultSettings;
+import ru.trade.utils.ConfigDefaultData;
 
 import java.util.logging.Logger;
 
@@ -30,7 +30,7 @@ public class Trade extends JavaPlugin {
         API = new TradeAPI();
 
         FileConfiguration langConfig = this.getConfig();
-        ConfigDefaultSettings configDefaultSettings = new ConfigDefaultSettings();
+        ConfigDefaultData configDefaultSettings = new ConfigDefaultData();
         saveConfig();
         if (!setupEconomy()) {
             log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));

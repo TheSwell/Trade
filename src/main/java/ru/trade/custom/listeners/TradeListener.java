@@ -47,7 +47,6 @@ public class TradeListener implements Listener {
     @EventHandler
     public void onStopTrade(StopTradeEvent e) {
         Player player = e.getPlayer();
-        player.sendMessage("Эвент работает.");
 
         if (e.isTrading()) {
             SellerInventoryListener.getItemPrice().remove(e.getInventory());
