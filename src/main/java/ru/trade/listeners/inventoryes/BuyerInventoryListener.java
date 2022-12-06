@@ -1,4 +1,4 @@
-package ru.trade.listeners;
+package ru.trade.listeners.inventoryes;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,10 +8,10 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import ru.trade.Trade;
-import ru.trade.TradeAPI;
-import ru.trade.utils.BuyerUtils;
-import ru.trade.utils.ItemsUtils;
-import ru.trade.utils.PlaceHolder;
+import ru.trade.api.TradeAPI;
+import ru.trade.utils.OpenItemBuyInventory;
+import ru.trade.utils.ItemUtils;
+import ru.trade.utils.Replacer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,9 +21,9 @@ public class BuyerInventoryListener implements Listener {
     private static final Map<String, Integer> selectedSlot = new HashMap<>();
 
     TradeAPI api = Trade.getAPI();
-    BuyerUtils buyerUtils = new BuyerUtils();
+    OpenItemBuyInventory buyerUtils = new OpenItemBuyInventory();
 
-    ItemsUtils itemsUtils = new ItemsUtils();
+    ItemUtils itemsUtils = new ItemUtils();
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
@@ -39,7 +39,7 @@ public class BuyerInventoryListener implements Listener {
                         e.setCancelled(true);
                         if (e.getCurrentItem() != null) {
                             selectedSlot.put(player.getName(), e.getSlot());
-                            buyerUtils.openBuyConfirmation(player, e.getCurrentItem());
+                            buyerUtils.openBuyInventory(player, e.getCurrentItem());
                         }
                     }
                 }
@@ -61,7 +61,7 @@ public class BuyerInventoryListener implements Listener {
                                             player.sendMessage("§7[§4-§7]§f " + SellerInventoryListener.getItemPrice().get(inventory).get(slot));
                                             tradeInventory.get(player.getName()).sendMessage("§7[§2+§7]§f " + SellerInventoryListener.getItemPrice().get(inventory).get(slot));
                                             SellerInventoryListener.getItemPrice().get(inventory).remove(slot);
-                                        } else player.sendMessage(PlaceHolder.setPlaceHolderInConfig("haventMoney"));
+                                        } else player.sendMessage(Replacer.setPlaceHolderInConfig("haventMoney"));
                                     }
                                 }
                             }
@@ -69,7 +69,7 @@ public class BuyerInventoryListener implements Listener {
                         player.openInventory(inventory);
                     } else {
                         player.closeInventory();
-                        player.sendMessage(PlaceHolder.setPlaceHolderInConfig("stoppedTrade", player));
+                        player.sendMessage(Replacer.setPlaceHolderInConfig("stoppedTrade", player));
                     }
                 }
             } else {

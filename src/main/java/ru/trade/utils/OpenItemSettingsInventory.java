@@ -1,24 +1,23 @@
-package ru.trade;
+package ru.trade.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import ru.trade.listeners.SellerInventoryListener;
-import ru.trade.utils.MenuItems;
+import ru.trade.Trade;
+import ru.trade.listeners.inventoryes.SellerInventoryListener;
 
-public class AddItemAttributes {
+public class OpenItemSettingsInventory {
 
-    public void openItemAttributeMenu(Player player) {
+    public void openSettingsInventory(Player player) {
         Inventory inventory = Bukkit.createInventory(null, 9, "Attributes");
-        double price;
         int slot = SellerInventoryListener.getSaveSelectedSlot().get(player.getName());
         ItemStack item = Trade.getAPI().getTradeInventory(player).getItem(slot);
 
 
-        inventory.setItem(1, MenuItems.priceItem);
+        inventory.setItem(1, SettingsInventoryItems.priceItem);
         inventory.setItem(4, item);
-        inventory.setItem(7, MenuItems.cancelItem);
+        inventory.setItem(7, SettingsInventoryItems.cancelItem);
 
         player.openInventory(inventory);
     }

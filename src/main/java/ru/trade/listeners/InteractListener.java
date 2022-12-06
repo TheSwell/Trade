@@ -6,7 +6,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import ru.trade.Trade;
-import ru.trade.utils.PlaceHolder;
+import ru.trade.listeners.inventoryes.BuyerInventoryListener;
+import ru.trade.listeners.inventoryes.SellerInventoryListener;
+import ru.trade.utils.Replacer;
 
 public class InteractListener implements Listener {
 
@@ -20,7 +22,7 @@ public class InteractListener implements Listener {
                         player.openInventory(Trade.getAPI().getTradeInventory(clickedPlayer));
                         BuyerInventoryListener.getTradeInventory().put(player.getName(), clickedPlayer.getPlayer());
                     } else {
-                        player.sendMessage(PlaceHolder.setPlaceHolderInConfig("thisPlayerEditTrade"));
+                        player.sendMessage(Replacer.setPlaceHolderInConfig("thisPlayerEditTrade"));
                     }
                 }
         }

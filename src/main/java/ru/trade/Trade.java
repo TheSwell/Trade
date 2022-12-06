@@ -6,8 +6,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.trade.api.TradeAPI;
 import ru.trade.executors.TradeExecutor;
 import ru.trade.listeners.*;
+import ru.trade.custom.listeners.TradeListener;
+import ru.trade.listeners.inventoryes.BuyerInventoryListener;
+import ru.trade.listeners.inventoryes.SellerInventoryListener;
 import ru.trade.utils.ConfigDefaultSettings;
 
 import java.util.logging.Logger;
@@ -40,6 +44,7 @@ public class Trade extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BuyerInventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new DamageListener(), this);
         Bukkit.getPluginManager().registerEvents(new ConnectionListener(), this);
+        Bukkit.getPluginManager().registerEvents(new TradeListener(), this);
 
         getCommand("Trade").setExecutor(new TradeExecutor());
     }

@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class MenuItems {
+public class SettingsInventoryItems {
     public static ItemStack priceItem = new ItemStack(Material.SUNFLOWER);
     public static ItemMeta priceMeta = priceItem.getItemMeta();
 
@@ -16,13 +16,13 @@ public class MenuItems {
 
 
     static {
-        priceMeta.setDisplayName(PlaceHolder.setPlaceHolderInConfig("addPriceButton"));
+        priceMeta.setDisplayName(Replacer.setPlaceHolderInConfig("addPriceButton"));
         priceItem.setItemMeta(priceMeta);
 
-        cancelMeta.setDisplayName(PlaceHolder.setPlaceHolderInConfig("backButton"));
+        cancelMeta.setDisplayName(Replacer.setPlaceHolderInConfig("backButton"));
         cancelItem.setItemMeta(cancelMeta);
 
-        buyButtonMeta.setDisplayName(PlaceHolder.setPlaceHolderInConfig("buyButton"));
+        buyButtonMeta.setDisplayName(Replacer.setPlaceHolderInConfig("buyButton"));
         buyButton.setItemMeta(buyButtonMeta);
     }
 }

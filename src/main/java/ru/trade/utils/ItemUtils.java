@@ -4,14 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class ItemsUtils {
-    public ItemStack copyItemWithoutPriceLore(ItemStack item) {
+public class ItemUtils {
+    public static ItemStack copyItemWithoutPriceLore(ItemStack item) {
         if (item != null && item.hasItemMeta() && item.getItemMeta().hasLore()) {
             ItemStack newItem = new ItemStack(item.getType());
             newItem.setAmount(item.getAmount());
@@ -31,7 +28,7 @@ public class ItemsUtils {
         return item;
     }
 
-    public Double getItemPrice(ItemStack item) {
+    public static Double getItemPrice(ItemStack item) {
         if (item != null && item.hasItemMeta() && item.getItemMeta().hasLore()) {
 
             String s = String.valueOf(item.getItemMeta().getLore().get(item.getItemMeta().getLore().size() - 1));

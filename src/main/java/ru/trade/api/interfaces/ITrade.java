@@ -1,4 +1,4 @@
-package ru.trade.interfaces;
+package ru.trade.api.interfaces;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public interface TradeInterface {
+public interface ITrade {
 
     public void startTrade(Player player);
 

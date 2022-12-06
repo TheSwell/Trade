@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import ru.trade.Trade;
 
-public class PlaceHolder {
+public class Replacer {
 
     public static String setPlaceHolderInConfig(String key, Player player, Player targetPlayer) {
         String cfg = Trade.getInstance().getConfig().getString(key);

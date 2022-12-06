@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import ru.trade.Trade;
-import ru.trade.utils.PlaceHolder;
+import ru.trade.utils.Replacer;
 
 public class TradeExecutor implements CommandExecutor {
     @Override
@@ -17,7 +17,7 @@ public class TradeExecutor implements CommandExecutor {
             if (args.length == 0)
                 if (player.hasPermission("trade")) {
                     Trade.getAPI().startTrade(player);
-                } else player.sendMessage(PlaceHolder.setPlaceHolderInConfig("haventPerms", player));
+                } else player.sendMessage(Replacer.setPlaceHolderInConfig("haventPerms", player));
             if (player.hasPermission("trade.admin")) {
                 if (args.length > 0) {
                     if (args[0].equalsIgnoreCase("stop")) {
@@ -27,11 +27,11 @@ public class TradeExecutor implements CommandExecutor {
                                 Trade.getAPI().stopTrade(targetPlayer);
                                 targetPlayer.closeInventory();
                             } else
-                                player.sendMessage(PlaceHolder.setPlaceHolderInConfig("stopCommandNotTrade", player, targetPlayer));
+                                player.sendMessage(Replacer.setPlaceHolderInConfig("stopCommandNotTrade", player, targetPlayer));
                         }
                     }
                 }
-            } else player.sendMessage(PlaceHolder.setPlaceHolderInConfig("haventPerms", player));
+            } else player.sendMessage(Replacer.setPlaceHolderInConfig("haventPerms", player));
         }
         return false;
     }

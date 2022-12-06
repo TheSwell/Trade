@@ -8,7 +8,8 @@ import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import ru.trade.Trade;
-import ru.trade.utils.PlaceHolder;
+import ru.trade.listeners.inventoryes.SellerInventoryListener;
+import ru.trade.utils.Replacer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +46,7 @@ public class ChatListener implements Listener {
                         player.openInventory(inventory);
                         getPriceRequest.remove(player.getName());
                     } else {
-                        player.sendMessage(PlaceHolder.setPlaceHolderInConfig("symbolsError"));
+                        player.sendMessage(Replacer.setPlaceHolderInConfig("symbolsError"));
                         inventory.setItem(slot, new ItemStack(Material.AIR));
                     }
                 } catch (NumberFormatException exception) {

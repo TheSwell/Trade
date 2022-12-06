@@ -1,4 +1,4 @@
-package ru.trade.listeners;
+package ru.trade.listeners.inventoryes;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -9,17 +9,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import ru.trade.AddItemAttributes;
+import ru.trade.utils.OpenItemSettingsInventory;
 import ru.trade.Trade;
-import ru.trade.TradeAPI;
-import ru.trade.utils.ItemsUtils;
-import ru.trade.utils.PlaceHolder;
+import ru.trade.api.TradeAPI;
+import ru.trade.utils.ItemUtils;
+import ru.trade.utils.Replacer;
 
 import java.util.*;
 
 public class SellerInventoryListener implements Listener {
 
-    AddItemAttributes itemAttributes = new AddItemAttributes();
+    OpenItemSettingsInventory itemAttributes = new OpenItemSettingsInventory();
 
     private static Map<Inventory, Map<Integer, Double>> itemPrice = new HashMap<>();
     private static Map<String, Integer> saveSelectedSlot = new HashMap<>();
@@ -28,7 +28,7 @@ public class SellerInventoryListener implements Listener {
     TradeAPI api = Trade.getAPI();
 
 
-    ItemsUtils itemsUtils = new ItemsUtils();
+    ItemUtils itemsUtils = new ItemUtils();
 
 
     @EventHandler
@@ -49,7 +49,7 @@ public class SellerInventoryListener implements Listener {
                                         Player viewerPlayer = (Player) viewer;
                                         if (viewerPlayer != player) {
                                             viewerPlayer.closeInventory();
-                                            viewerPlayer.sendMessage(PlaceHolder.setPlaceHolderInConfig("thisPlayerEditTrade"));
+                                            viewerPlayer.sendMessage(Replacer.setPlaceHolderInConfig("thisPlayerEditTrade"));
                                         }
                                     }
                                 } catch (ConcurrentModificationException ignored) {
@@ -58,8 +58,8 @@ public class SellerInventoryListener implements Listener {
                             e.getClickedInventory().setItem(e.getSlot(), e.getCursor());
                             e.getCursor().setAmount(0);
                             saveSelectedSlot.put(player.getName(), e.getSlot());
-                            itemAttributes.openItemAttributeMenu(player);
-                        } else player.sendMessage(PlaceHolder.setPlaceHolderInConfig("TheSlotIsBusy"));
+                            itemAttributes.openSettingsInventory(player);
+                        } else player.sendMessage(Replacer.setPlaceHolderInConfig("TheSlotIsBusy"));
                     }
                 } else if (e.getClick() == ClickType.RIGHT) {
                     if (e.getCurrentItem() != null) {
@@ -78,7 +78,7 @@ public class SellerInventoryListener implements Listener {
             switch (e.getCurrentItem().getType()) {
                 case SUNFLOWER -> {
                     priceRequest.add(player.getName());
-                    player.sendMessage(PlaceHolder.setPlaceHolderInConfig("priceHelp"));
+                    player.sendMessage(Replacer.setPlaceHolderInConfig("priceHelp"));
                     player.closeInventory();
                 }
                 case BARRIER -> {
@@ -109,7 +109,7 @@ public class SellerInventoryListener implements Listener {
                     saveSelectedSlot.remove(player.getName());
                     if (priceRequest.contains(player.getName()))
                         priceRequest.remove(player.getName());
-                    player.sendMessage(PlaceHolder.setPlaceHolderInConfig("youStoppedTrade"));
+                    player.sendMessage(Replacer.setPlaceHolderInConfig("youStoppedTrade"));
                 }
             } else if (e.getView().getTitle().equalsIgnoreCase("Attributes") && !priceRequest.contains(player.getName())) {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(Trade.getInstance(), () -> {
