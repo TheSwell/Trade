@@ -1,0 +1,6 @@
+name: Trade
+main: ru.trade.Trade
+version: 1.0
+api-version: 1.13
+commands:
+  trade:
